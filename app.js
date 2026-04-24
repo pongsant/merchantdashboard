@@ -59,6 +59,7 @@
     modalRecord: null,
     switchToken: 0,
     theme: activeTheme,
+    menuFxTimer: null,
   };
 
   const pageMeta = {
@@ -83,6 +84,7 @@
     pageContainer: document.getElementById("pageContainer"),
     pageTitle: document.getElementById("pageTitle"),
     pageSubtitle: document.getElementById("pageSubtitle"),
+    viewingIndicator: document.getElementById("viewingIndicator"),
     topFilters: document.getElementById("topFilters"),
     themeSwitcher: document.getElementById("themeSwitcher"),
     themeNote: document.getElementById("themeNote"),
@@ -245,7 +247,10 @@
             const active = state.page === item.id ? "active" : "";
             return `
               <button class="nav-item ${active}" data-page="${item.id}" ${mode === "mobile" ? 'data-mobile-nav="1"' : ""}>
-                <span class="nav-label"><span class="nav-icon">${navIcon(item.id)}</span>${item.label}</span>
+                <span class="nav-label">
+                  <span class="nav-icon">${navIcon(item.id)}</span>
+                  <span>${item.label}</span>
+                </span>
                 <span class="nav-metric">${getNavMetric(item.id)}</span>
               </button>
             `;
@@ -287,6 +292,23 @@
     document.body.setAttribute("data-page", page);
     el.pageTitle.textContent = m.title;
     el.pageSubtitle.textContent = m.sub;
+    const current = data.nav.find((item) => item.id === page);
+    if (el.viewingIndicator) {
+      const topicIcon = current?.emoji || "•";
+      const topicLabel = current?.label || m.title;
+      el.viewingIndicator.textContent = `กำลังดูข้อมูล: ${topicIcon} ${topicLabel}`;
+    }
+  }
+
+  function triggerTopicLinkEffect() {
+    document.body.classList.remove("topic-linking");
+    if (state.menuFxTimer) window.clearTimeout(state.menuFxTimer);
+    requestAnimationFrame(() => {
+      document.body.classList.add("topic-linking");
+    });
+    state.menuFxTimer = window.setTimeout(() => {
+      document.body.classList.remove("topic-linking");
+    }, 460);
   }
 
   function cardMoreButton(type, id) {
@@ -1035,6 +1057,7 @@
       const pageBtn = event.target.closest("[data-page]");
       if (pageBtn) {
         const p = pageBtn.getAttribute("data-page");
+        triggerTopicLinkEffect();
         setPage(p, { animated: true });
         closeDrawer();
       }
@@ -1081,8 +1104,14 @@
       closeModal();
     });
 
-    el.accountBtn.addEventListener("click", () => setPage("notifications"));
-    el.settingBtn.addEventListener("click", () => setPage("settings"));
+    el.accountBtn.addEventListener("click", () => {
+      triggerTopicLinkEffect();
+      setPage("notifications", { animated: true });
+    });
+    el.settingBtn.addEventListener("click", () => {
+      triggerTopicLinkEffect();
+      setPage("settings", { animated: true });
+    });
   }
 
   function init() {

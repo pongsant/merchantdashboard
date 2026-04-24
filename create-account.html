@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Push - Login</title>
+    <title>Push - Create Account</title>
     <link rel="stylesheet" href="./styles.css" />
     <style>
       .auth-page {
@@ -13,13 +13,13 @@
         place-items: center;
         padding: 24px;
         background:
-          radial-gradient(circle at 82% -16%, rgba(188, 241, 114, 0.25), transparent 40%),
-          radial-gradient(circle at -6% 118%, rgba(151, 190, 255, 0.2), transparent 34%),
+          radial-gradient(circle at 84% -14%, rgba(197, 243, 135, 0.25), transparent 41%),
+          radial-gradient(circle at -10% 120%, rgba(170, 199, 255, 0.2), transparent 34%),
           #f3f5ef;
       }
 
       .auth-card {
-        width: min(440px, 100%);
+        width: min(500px, 100%);
         border-radius: 24px;
         background: rgba(255, 255, 255, 0.9);
         border: 1px solid rgba(28, 35, 46, 0.08);
@@ -48,14 +48,14 @@
       .auth-title {
         margin: 0;
         font-family: "Darky", "Darker Grotesque", sans-serif;
-        font-size: 46px;
+        font-size: 42px;
         line-height: 0.95;
         font-weight: 300;
         color: #1f2329;
       }
 
       .auth-subtitle {
-        margin: 6px 0 24px;
+        margin: 6px 0 22px;
         color: #6e7682;
         font-size: 16px;
         font-weight: 300;
@@ -63,7 +63,13 @@
 
       .auth-form {
         display: grid;
-        gap: 14px;
+        gap: 12px;
+      }
+
+      .auth-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
       }
 
       .auth-label {
@@ -74,7 +80,8 @@
         font-weight: 400;
       }
 
-      .auth-input {
+      .auth-input,
+      .auth-select {
         width: 100%;
         border: 1px solid #d8dde7;
         border-radius: 12px;
@@ -82,11 +89,27 @@
         background: #f8f9fb;
         color: #1f2329;
         font-family: "Darky", "Darker Grotesque", sans-serif;
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 400;
       }
 
-      .auth-input:focus {
+      .auth-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image:
+          linear-gradient(45deg, transparent 50%, #646d79 50%),
+          linear-gradient(135deg, #646d79 50%, transparent 50%);
+        background-position:
+          calc(100% - 20px) calc(50% - 2px),
+          calc(100% - 14px) calc(50% - 2px);
+        background-size: 6px 6px, 6px 6px;
+        background-repeat: no-repeat;
+        padding-right: 36px;
+      }
+
+      .auth-input:focus,
+      .auth-select:focus {
         outline: none;
         border-color: #9daeff;
         box-shadow: 0 0 0 3px rgba(126, 149, 255, 0.15);
@@ -131,6 +154,12 @@
         color: #1f2329;
       }
 
+      @media (max-width: 640px) {
+        .auth-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @keyframes authFadeIn {
         to {
           transform: translateY(0);
@@ -142,37 +171,63 @@
   <body class="auth-page">
     <main class="auth-card">
       <div class="auth-logo" aria-hidden="true">P</div>
-      <h1 class="auth-title">Push</h1>
-      <p class="auth-subtitle">Merchant login</p>
+      <h1 class="auth-title">Create account</h1>
+      <p class="auth-subtitle">Company setup for your Push merchant workspace</p>
 
-      <form class="auth-form" id="loginForm" action="./index.html" novalidate>
-        <div>
-          <label class="auth-label" for="login-username">Username</label>
-          <input class="auth-input" id="login-username" type="text" name="username" autocomplete="username" />
+      <form class="auth-form" id="createForm" action="./index.html" novalidate>
+        <div class="auth-grid">
+          <div>
+            <label class="auth-label" for="company-name">Company name</label>
+            <input class="auth-input" id="company-name" type="text" name="company_name" autocomplete="organization" />
+          </div>
+          <div>
+            <label class="auth-label" for="company-email">Email</label>
+            <input class="auth-input" id="company-email" type="email" name="email" autocomplete="email" />
+          </div>
         </div>
         <div>
-          <label class="auth-label" for="login-password">Password</label>
-          <input class="auth-input" id="login-password" type="password" name="password" autocomplete="current-password" />
+          <label class="auth-label" for="company-category">Company category</label>
+          <select class="auth-select" id="company-category" name="company_category" required>
+            <option value="" selected disabled>Select your company category</option>
+            <option value="food_drink">Food & Drink</option>
+            <option value="fashion">Fashion / Apparel</option>
+            <option value="beauty">Beauty / Skincare</option>
+            <option value="fitness">Fitness / Wellness</option>
+            <option value="travel">Travel / Hospitality</option>
+            <option value="lifestyle">Lifestyle / Home</option>
+            <option value="technology">Technology / SaaS</option>
+            <option value="other">Other</option>
+          </select>
         </div>
-        <button class="auth-submit" type="submit">Log in</button>
+        <div class="auth-grid">
+          <div>
+            <label class="auth-label" for="create-password">Password</label>
+            <input class="auth-input" id="create-password" type="password" name="password" autocomplete="new-password" />
+          </div>
+          <div>
+            <label class="auth-label" for="create-password-confirm">Confirm password</label>
+            <input class="auth-input" id="create-password-confirm" type="password" name="password_confirm" autocomplete="new-password" />
+          </div>
+        </div>
+        <button class="auth-submit" type="submit">Create account</button>
       </form>
 
       <div class="auth-footer">
-        <button class="auth-link" id="goCreateAccount" type="button">Create account</button>
+        <button class="auth-link" id="goLogin" type="button">Back to login</button>
       </div>
     </main>
 
     <script>
       sessionStorage.removeItem("merchant_dashboard_logged_in");
 
-      document.getElementById("loginForm").addEventListener("submit", function (event) {
+      document.getElementById("createForm").addEventListener("submit", function (event) {
         event.preventDefault();
         sessionStorage.setItem("merchant_dashboard_logged_in", "1");
         window.location.replace("./index.html");
       });
 
-      document.getElementById("goCreateAccount").addEventListener("click", function () {
-        window.location.href = "./create-account.html";
+      document.getElementById("goLogin").addEventListener("click", function () {
+        window.location.href = "./login.html";
       });
     </script>
   </body>
