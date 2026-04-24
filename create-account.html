@@ -13,52 +13,122 @@
         place-items: center;
         padding: 24px;
         background:
-          radial-gradient(circle at 84% -14%, rgba(197, 243, 135, 0.25), transparent 41%),
-          radial-gradient(circle at -10% 120%, rgba(170, 199, 255, 0.2), transparent 34%),
-          #f3f5ef;
+          radial-gradient(circle at 78% 14%, rgba(255, 255, 255, 0.88), transparent 22%),
+          radial-gradient(circle at 16% 16%, rgba(226, 229, 234, 0.86), transparent 24%),
+          linear-gradient(180deg, #efefec 0%, #e9e8e5 100%);
       }
 
       .auth-card {
-        width: min(500px, 100%);
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(28, 35, 46, 0.08);
-        box-shadow: 0 16px 40px rgba(22, 28, 38, 0.08);
-        padding: 30px 28px 22px;
+        width: min(1380px, 100%);
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1.06fr) minmax(520px, 0.98fr);
+        gap: clamp(24px, 2.8vw, 48px);
+        border-radius: 0;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        padding: 0;
         animation: authFadeIn 0.44s var(--ease-smooth) forwards;
         transform: translateY(10px);
         opacity: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .auth-card::before {
+        content: "create";
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        bottom: -18px;
+        font-family: "Darky", "Darker Grotesque", sans-serif;
+        font-size: clamp(64px, 15vw, 200px);
+        line-height: 0.88;
+        letter-spacing: -0.1em;
+        font-weight: 700;
+        color: rgba(17, 18, 22, 0.06);
+        pointer-events: none;
+      }
+
+      .auth-brand {
+        position: relative;
+        padding: 34px 34px 38px;
+        border-right: 0;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .auth-brand-copy {
+        max-width: 34ch;
       }
 
       .auth-logo {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 42px;
-        height: 42px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
-        background: #15181f;
+        background: linear-gradient(180deg, #1d2027, #0d0f14);
         color: #f7f9ff;
         font-family: "Darky", "Darker Grotesque", sans-serif;
         font-weight: 400;
-        font-size: 23px;
-        margin-bottom: 14px;
+        font-size: 24px;
+        margin-bottom: 18px;
+        box-shadow: 0 10px 24px rgba(17, 18, 22, 0.18);
       }
 
       .auth-title {
         margin: 0;
         font-family: "Darky", "Darker Grotesque", sans-serif;
-        font-size: 42px;
-        line-height: 0.95;
-        font-weight: 300;
+        font-size: clamp(56px, 9.5vw, 132px);
+        line-height: 0.9;
+        letter-spacing: -0.08em;
+        font-weight: 700;
         color: #1f2329;
+        overflow-wrap: anywhere;
       }
 
       .auth-subtitle {
-        margin: 6px 0 22px;
+        margin: 12px 0 0;
         color: #6e7682;
-        font-size: 16px;
+        font-size: clamp(18px, 2.4vw, 24px);
         font-weight: 300;
+        line-height: 1.26;
+      }
+
+      .auth-brand-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      .auth-brand-meta span {
+        padding-top: 12px;
+        border-top: 0;
+        color: rgba(17, 19, 24, 0.56);
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+      }
+
+      .auth-form-shell {
+        position: relative;
+        padding: 34px 34px 28px;
+        width: min(100%, 680px);
+        justify-self: end;
+      }
+
+      .auth-kicker {
+        margin: 0 0 14px;
+        color: rgba(17, 19, 24, 0.54);
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
       }
 
       .auth-form {
@@ -69,28 +139,29 @@
       .auth-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+        gap: 14px;
       }
 
       .auth-label {
         display: block;
         margin-bottom: 6px;
         color: #626b78;
-        font-size: 14px;
+        font-size: 18px;
         font-weight: 400;
       }
 
       .auth-input,
       .auth-select {
         width: 100%;
-        border: 1px solid #d8dde7;
-        border-radius: 12px;
-        padding: 12px 14px;
-        background: #f8f9fb;
+        border: 0;
+        border-radius: 18px;
+        padding: 16px 18px;
+        background: rgba(255, 255, 255, 0.82);
         color: #1f2329;
         font-family: "Darky", "Darker Grotesque", sans-serif;
-        font-size: 17px;
+        font-size: clamp(19px, 3.8vw, 22px);
         font-weight: 400;
+        box-shadow: inset 0 0 0 1px rgba(17, 19, 24, 0.08);
       }
 
       .auth-select {
@@ -115,23 +186,33 @@
         box-shadow: 0 0 0 3px rgba(126, 149, 255, 0.15);
       }
 
+      .auth-other-wrap {
+        display: none;
+        margin-top: 10px;
+      }
+
+      .auth-other-wrap.is-visible {
+        display: block;
+      }
+
       .auth-submit {
         margin-top: 4px;
         border: 0;
         border-radius: 999px;
-        background: #11141b;
-        color: #f8fbff;
+        background: rgba(255, 255, 255, 0.82);
+        color: #11141b;
         cursor: pointer;
         font-family: "Darky", "Darker Grotesque", sans-serif;
-        font-size: 21px;
+        font-size: clamp(22px, 5vw, 28px);
         font-weight: 400;
-        padding: 11px 16px;
+        padding: 14px 18px;
         transition: transform 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
+        box-shadow: inset 0 0 0 1px rgba(17, 19, 24, 0.12);
       }
 
       .auth-submit:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(18, 24, 36, 0.16);
+        box-shadow: 0 10px 20px rgba(18, 24, 36, 0.08);
       }
 
       .auth-footer {
@@ -144,7 +225,7 @@
         background: transparent;
         color: #646d79;
         font-family: "Darky", "Darker Grotesque", sans-serif;
-        font-size: 14px;
+        font-size: 17px;
         font-weight: 400;
         text-decoration: underline;
         cursor: pointer;
@@ -154,9 +235,33 @@
         color: #1f2329;
       }
 
+      @media (max-width: 1024px) {
+        .auth-card {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .auth-brand,
+        .auth-form-shell {
+          width: 100%;
+          justify-self: stretch;
+        }
+      }
+
       @media (max-width: 640px) {
         .auth-grid {
           grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .auth-page {
+          padding: 14px;
+        }
+
+        .auth-brand,
+        .auth-form-shell {
+          padding: 22px 16px 20px;
         }
       }
 
@@ -170,63 +275,107 @@
   </head>
   <body class="auth-page">
     <main class="auth-card">
-      <div class="auth-logo" aria-hidden="true">P</div>
-      <h1 class="auth-title">Create account</h1>
-      <p class="auth-subtitle">Company setup for your Push merchant workspace</p>
+      <section class="auth-brand">
+        <div class="auth-brand-copy">
+          <div class="auth-logo" aria-hidden="true">P</div>
+          <h1 class="auth-title">Create account</h1>
+          <p class="auth-subtitle">Set up your company profile with the same minimal editorial direction as the dashboard.</p>
+        </div>
+        <div class="auth-brand-meta">
+          <span>Category</span>
+          <span>Workspace</span>
+          <span>Access</span>
+        </div>
+      </section>
+      <section class="auth-form-shell">
+        <p class="auth-kicker">Company setup</p>
+        <form class="auth-form" id="createForm" action="./index.html" novalidate>
+          <div class="auth-grid">
+            <div>
+              <label class="auth-label" for="company-name">Company name</label>
+              <input class="auth-input" id="company-name" type="text" name="company_name" autocomplete="organization" />
+            </div>
+            <div>
+              <label class="auth-label" for="company-email">Email</label>
+              <input class="auth-input" id="company-email" type="email" name="email" autocomplete="email" />
+            </div>
+          </div>
+          <div>
+            <label class="auth-label" for="company-category">Company category</label>
+            <select class="auth-select" id="company-category" name="company_category" required>
+              <option value="" selected disabled>Select your company category</option>
+              <option value="food_drink">Food & Drink</option>
+              <option value="fashion">Fashion / Apparel</option>
+              <option value="beauty">Beauty / Skincare</option>
+              <option value="fitness">Fitness / Wellness</option>
+              <option value="travel">Travel / Hospitality</option>
+              <option value="lifestyle">Lifestyle / Home</option>
+              <option value="other">Other</option>
+            </select>
+            <div class="auth-other-wrap" id="otherCategoryWrap">
+              <label class="auth-label" for="company-category-other">Please specify</label>
+              <input class="auth-input" id="company-category-other" type="text" name="company_category_other" />
+            </div>
+          </div>
+          <div class="auth-grid">
+            <div>
+              <label class="auth-label" for="create-password">Password</label>
+              <input class="auth-input" id="create-password" type="password" name="password" autocomplete="new-password" />
+            </div>
+            <div>
+              <label class="auth-label" for="create-password-confirm">Confirm password</label>
+              <input class="auth-input" id="create-password-confirm" type="password" name="password_confirm" autocomplete="new-password" />
+            </div>
+          </div>
+          <button class="auth-submit" type="submit">Create account</button>
+        </form>
 
-      <form class="auth-form" id="createForm" action="./index.html" novalidate>
-        <div class="auth-grid">
-          <div>
-            <label class="auth-label" for="company-name">Company name</label>
-            <input class="auth-input" id="company-name" type="text" name="company_name" autocomplete="organization" />
-          </div>
-          <div>
-            <label class="auth-label" for="company-email">Email</label>
-            <input class="auth-input" id="company-email" type="email" name="email" autocomplete="email" />
-          </div>
+        <div class="auth-footer">
+          <button class="auth-link" id="goLogin" type="button">Back to login</button>
         </div>
-        <div>
-          <label class="auth-label" for="company-category">Company category</label>
-          <select class="auth-select" id="company-category" name="company_category" required>
-            <option value="" selected disabled>Select your company category</option>
-            <option value="food_drink">Food & Drink</option>
-            <option value="fashion">Fashion / Apparel</option>
-            <option value="beauty">Beauty / Skincare</option>
-            <option value="fitness">Fitness / Wellness</option>
-            <option value="travel">Travel / Hospitality</option>
-            <option value="lifestyle">Lifestyle / Home</option>
-            <option value="technology">Technology / SaaS</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div class="auth-grid">
-          <div>
-            <label class="auth-label" for="create-password">Password</label>
-            <input class="auth-input" id="create-password" type="password" name="password" autocomplete="new-password" />
-          </div>
-          <div>
-            <label class="auth-label" for="create-password-confirm">Confirm password</label>
-            <input class="auth-input" id="create-password-confirm" type="password" name="password_confirm" autocomplete="new-password" />
-          </div>
-        </div>
-        <button class="auth-submit" type="submit">Create account</button>
-      </form>
-
-      <div class="auth-footer">
-        <button class="auth-link" id="goLogin" type="button">Back to login</button>
-      </div>
+      </section>
     </main>
 
     <script>
-      sessionStorage.removeItem("merchant_dashboard_logged_in");
+      try {
+        sessionStorage.removeItem("push_dashboard_authed");
+        sessionStorage.removeItem("merchant_dashboard_logged_in");
+      } catch (_error) {
+        // noop
+      }
 
-      document.getElementById("createForm").addEventListener("submit", function (event) {
+      const createForm = document.getElementById("createForm");
+      const goLogin = document.getElementById("goLogin");
+      const categorySelect = document.getElementById("company-category");
+      const otherCategoryWrap = document.getElementById("otherCategoryWrap");
+      const otherCategoryInput = document.getElementById("company-category-other");
+
+      function syncOtherCategoryVisibility() {
+        const isOther = categorySelect?.value === "other";
+        otherCategoryWrap?.classList.toggle("is-visible", isOther);
+        if (otherCategoryInput) {
+          otherCategoryInput.required = Boolean(isOther);
+          if (!isOther) {
+            otherCategoryInput.value = "";
+          }
+        }
+      }
+
+      categorySelect?.addEventListener("change", syncOtherCategoryVisibility);
+      syncOtherCategoryVisibility();
+
+      createForm?.addEventListener("submit", (event) => {
         event.preventDefault();
-        sessionStorage.setItem("merchant_dashboard_logged_in", "1");
-        window.location.replace("./index.html");
+        try {
+          sessionStorage.setItem("push_dashboard_authed", "true");
+          sessionStorage.setItem("merchant_dashboard_logged_in", "1");
+        } catch (_error) {
+          // noop
+        }
+        window.location.href = "./index.html";
       });
 
-      document.getElementById("goLogin").addEventListener("click", function () {
+      goLogin?.addEventListener("click", () => {
         window.location.href = "./login.html";
       });
     </script>

@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Push Merchant Dashboard Prototype</title>
     <script>
-      if (sessionStorage.getItem("merchant_dashboard_logged_in") !== "1") {
+      const isLegacyLoggedIn = sessionStorage.getItem("merchant_dashboard_logged_in") === "1";
+      const isCurrentLoggedIn = sessionStorage.getItem("push_dashboard_authed") === "true";
+      if (!isLegacyLoggedIn && !isCurrentLoggedIn) {
         window.location.replace("./login.html");
       }
     </script>
