@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Push Merchant Dashboard Prototype</title>
+    <script>
+      if (localStorage.getItem("merchant_dashboard_logged_in") !== "1") {
+        window.location.replace("./login.html");
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <div class="logo-mark">P</div>
+          <div>
+            <p class="logo-label">Push</p>
+            <p class="logo-sub">Merchant OS</p>
+          </div>
+        </div>
+        <section class="theme-switcher-wrap">
+          <p class="micro-label">Category Themes</p>
+          <div class="theme-switcher" id="themeSwitcher"></div>
+          <p class="theme-note" id="themeNote"></p>
+        </section>
+        <nav class="nav" id="sidebarNav" aria-label="Primary navigation"></nav>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="icon-btn" id="menuToggle" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="top-title-wrap">
+            <h1 id="pageTitle">Dashboard</h1>
+            <p id="pageSubtitle">Real-time merchant intelligence</p>
+          </div>
+          <div class="top-actions">
+            <div class="top-filters" id="topFilters"></div>
+            <button class="icon-chip" id="accountBtn" aria-label="Account">
+              <span>👤</span>
+              <span>Account</span>
+            </button>
+            <button class="icon-chip" id="settingBtn" aria-label="Settings">
+              <span>⚙️</span>
+              <span>Settings</span>
+            </button>
+          </div>
+        </header>
+
+        <section id="pageContainer" class="page-container"></section>
+      </main>
+    </div>
+
+    <div class="mobile-drawer-backdrop" id="mobileBackdrop"></div>
+    <nav class="mobile-drawer" id="mobileDrawer" aria-label="Main navigation">
+      <div class="mobile-head">
+        <div class="sidebar-logo">
+          <div class="logo-mark">P</div>
+          <div>
+            <p class="logo-label">Push</p>
+            <p class="logo-sub">Merchant OS</p>
+          </div>
+        </div>
+        <button class="icon-btn close" id="closeDrawer" aria-label="Close menu">
+          ✕
+        </button>
+      </div>
+      <div id="mobileNav"></div>
+    </nav>
+
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="modalClose" aria-label="Close details">✕</button>
+        <p class="modal-kicker" id="modalKicker"></p>
+        <h2 id="modalTitle">Details</h2>
+        <div id="modalBody"></div>
+        <div class="modal-actions">
+          <button class="btn ghost" id="modalDismiss">Close</button>
+          <button class="btn primary" id="openFullDetail">Open full page</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
